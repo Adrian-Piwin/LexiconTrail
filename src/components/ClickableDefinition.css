@@ -1,0 +1,53 @@
+.clickable-definition {
+  line-height: 1.6;
+  font-size: 1.1rem;
+  color: #333;
+  text-align: left;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.definition-word {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  cursor: default;
+}
+
+.definition-word.clickable {
+  color: #007bff;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+  padding: 1px 2px;
+}
+
+.definition-word.clickable:hover {
+  color: #0056b3;
+  background-color: #e3f2fd;
+  text-decoration: none;
+}
+
+.definition-word.clickable:active {
+  transform: translateY(1px);
+}
+
+.definition-word.clickable:focus {
+  outline: 2px solid #007bff;
+  outline-offset: 2px;
+}
+
+.definition-empty {
+  color: #6c757d;
+  font-style: italic;
+  text-align: center;
+  margin: 1rem 0;
+} 
