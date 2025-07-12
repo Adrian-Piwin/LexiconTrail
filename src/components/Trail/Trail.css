@@ -1,0 +1,61 @@
+@import '../../styles/colors.css';
+@import './Trail-mobile.css';
+
+.game-info {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.info-card {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  border: none;
+}
+
+.trail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.info-card h3 {
+  font-size: 1rem;
+  color: var(--text-subtle);
+  margin: 0;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.path-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  border: none;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.path-word {
+  background: none;
+  color: var(--text-muted);
+  padding: 0;
+  border-radius: 0;
+  font-weight: 400;
+  font-size: 1rem;
+  text-transform: capitalize;
+  border: none;
+}
+
+.path-arrow {
+  color: var(--text-subtle);
+  font-weight: 300;
+  font-size: 1rem;
+} 

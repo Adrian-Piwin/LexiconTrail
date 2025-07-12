@@ -1,0 +1,43 @@
+@media (max-width: 768px) {
+  .current-word-section {
+    margin-bottom: 1rem;
+  }
+
+  .current-word-section h2 {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .current-word-card {
+    padding: 1.5rem;
+    margin: 0 0.5rem;
+    border-radius: 15px;
+  }
+
+  .current-word-card h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .current-word-section {
+    margin-bottom: 0.75rem;
+  }
+
+  .current-word-section h2 {
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .current-word-card {
+    padding: 1rem;
+    margin: 0 0.25rem;
+    border-radius: 12px;
+  }
+
+  .current-word-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+} 

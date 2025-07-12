@@ -1,3 +1,6 @@
+@import '../styles/colors.css';
+@import './Game-mobile.css';
+
 /* Game Container */
 .game-container {
   max-width: 1000px;
@@ -9,73 +12,6 @@
   gap: 3rem;
 }
 
-/* Game Header */
-.game-header {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-.game-header h1 {
-  font-size: 2.5rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-  font-weight: 300;
-  letter-spacing: -0.02em;
-}
-
-.game-description {
-  font-size: 1.1rem;
-  color: #a0a0a0;
-  margin-bottom: 2rem;
-  max-width: 500px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.game-stats {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.stat {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #ffffff;
-  padding: 0.5rem 1.5rem;
-  border-radius: 25px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Win Message */
-.win-message {
-  background: rgba(255, 255, 255, 0.05);
-  color: white;
-  padding: 3rem 2rem;
-  border-radius: 20px;
-  margin: 2rem 0;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  text-align: center;
-}
-
-.win-message h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  font-weight: 300;
-  color: #4ade80;
-}
-
-.win-message p {
-  font-size: 1.2rem;
-  margin: 0;
-  color: #d1d5db;
-}
-
 /* Game Content */
 .game-content {
   flex: 1;
@@ -84,151 +20,29 @@
   gap: 3rem;
 }
 
-/* Start to Target Display */
-.start-target-display {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background: rgba(255, 255, 255, 0.03);
+/* Win Message */
+.win-message {
+  background: var(--glass-bg);
+  color: var(--text-primary);
+  padding: 3rem 2rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.start-word,
-.target-word {
+  margin: 2rem 0;
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
   text-align: center;
-  padding: 1.5rem 2rem;
-  border-radius: 15px;
-  min-width: 200px;
 }
 
-.start-word {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-}
-
-.target-word {
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
-}
-
-.start-word h3,
-.target-word h3 {
-  font-size: 1.8rem;
-  margin: 0 0 0.5rem 0;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-.start-word h3 {
-  color: #60a5fa;
-}
-
-.target-word h3 {
-  color: #f87171;
-}
-
-.start-word p,
-.target-word p {
-  margin: 0;
-  font-size: 0.9rem;
-  color: #9ca3af;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.arrow {
-  font-size: 2rem;
-  color: #6b7280;
-  font-weight: 300;
-}
-
-/* Current Word Section */
-.current-word-section {
-  text-align: center;
-  margin-bottom: 2rem;
-}
-
-.current-word-section h2 {
-  font-size: 1.2rem;
-  color: #9ca3af;
-  margin: 0 0 1rem 0;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-.current-word-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  padding: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-.current-word-card h3 {
+.win-message h2 {
   font-size: 2.5rem;
-  color: #ffffff;
-  margin: 0 0 1.5rem 0;
-  font-weight: 600;
-  text-transform: capitalize;
-}
-
-/* Game Info */
-.game-info {
-  margin-top: auto;
-  padding-top: 2rem;
-}
-
-.info-card {
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 15px;
-  padding: 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.info-card h3 {
-  font-size: 1rem;
-  color: #6b7280;
-  margin: 0 0 1rem 0;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
-
-/* Path Display */
-.path-display {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.path-word {
-  background: rgba(255, 255, 255, 0.1);
-  color: #d1d5db;
-  padding: 0.4rem 0.8rem;
-  border-radius: 15px;
-  font-weight: 500;
-  font-size: 0.85rem;
-  text-transform: capitalize;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.path-arrow {
-  color: #6b7280;
+  margin-bottom: 1rem;
   font-weight: 300;
-  font-size: 1rem;
+  color: var(--success);
+}
+
+.win-message p {
+  font-size: 1.2rem;
+  margin: 0;
+  color: var(--text-secondary);
 }
 
 /* Game Actions */
@@ -249,7 +63,7 @@
 /* Buttons */
 .btn {
   padding: 0.875rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-primary);
   border-radius: 12px;
   font-size: 1rem;
   font-weight: 500;
@@ -263,108 +77,29 @@
 }
 
 .btn-primary {
-  background: rgba(59, 130, 246, 0.1);
-  color: #60a5fa;
-  border-color: rgba(59, 130, 246, 0.3);
+  background: var(--interactive-primary);
+  color: var(--blue-accent);
+  border-color: var(--border-blue);
 }
 
 .btn-primary:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.5);
+  background: var(--interactive-primary-hover);
+  border-color: var(--border-blue);
   transform: translateY(-1px);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: #d1d5db;
-  border-color: rgba(255, 255, 255, 0.1);
+  background: var(--interactive-secondary);
+  color: var(--text-secondary);
+  border-color: var(--border-primary);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: var(--interactive-secondary-hover);
+  border-color: var(--border-primary);
   transform: translateY(-1px);
 }
 
 .btn:active {
   transform: translateY(0);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .game-container {
-    padding: 1rem;
-    gap: 2rem;
-  }
-  
-  .game-header h1 {
-    font-size: 2rem;
-  }
-  
-  .win-message h2 {
-    font-size: 2rem;
-  }
-  
-  .start-target-display {
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1.5rem;
-  }
-  
-  .start-word,
-  .target-word {
-    min-width: auto;
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .arrow {
-    transform: rotate(90deg);
-  }
-  
-  .current-word-card {
-    padding: 1.5rem;
-  }
-  
-  .current-word-card h3 {
-    font-size: 2rem;
-  }
-  
-  .game-actions {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .btn {
-    width: 100%;
-    max-width: 300px;
-  }
-  
-  .path-display {
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .path-arrow {
-    transform: rotate(90deg);
-  }
-}
-
-@media (max-width: 480px) {
-  .game-header h1 {
-    font-size: 1.75rem;
-  }
-  
-  .game-description {
-    font-size: 1rem;
-  }
-  
-  .start-word h3,
-  .target-word h3 {
-    font-size: 1.5rem;
-  }
-  
-  .current-word-card h3 {
-    font-size: 1.75rem;
-  }
 } 

@@ -1,0 +1,64 @@
+@media (max-width: 768px) {
+  .start-target-display {
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .start-word,
+  .target-word {
+    min-width: auto;
+    padding: 0.75rem 1rem;
+    flex: 1;
+    min-width: 120px;
+    max-width: 150px;
+  }
+
+  .start-word h3,
+  .target-word h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .start-word p,
+  .target-word p {
+    font-size: 0.7rem;
+  }
+
+  .arrow {
+    font-size: 1.2rem;
+    margin: 0 0.25rem;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .start-target-display {
+    gap: 0.5rem;
+  }
+
+  .start-word,
+  .target-word {
+    padding: 0.5rem 0.75rem;
+    min-width: 100px;
+    max-width: 120px;
+  }
+
+  .start-word h3,
+  .target-word h3 {
+    font-size: 1rem;
+  }
+
+  .start-word p,
+  .target-word p {
+    font-size: 0.65rem;
+  }
+
+  .arrow {
+    font-size: 1rem;
+    margin: 0 0.15rem;
+  }
+} 

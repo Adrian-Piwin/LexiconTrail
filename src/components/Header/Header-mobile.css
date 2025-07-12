@@ -1,0 +1,65 @@
+@media (max-width: 768px) {
+  .game-header {
+    margin-bottom: 0.5rem;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .game-header h1 {
+    font-size: 1.5rem;
+    margin: 0;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .game-description {
+    font-size: 0.85rem;
+    margin: 0.5rem 0;
+    max-width: none;
+    order: 3;
+    width: 100%;
+  }
+
+  .info-button {
+    position: static;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+    margin: 0;
+    flex-shrink: 0;
+  }
+
+  .game-stats {
+    margin-top: 0.5rem;
+  }
+
+  .stat {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-header {
+    gap: 0.25rem;
+  }
+
+  .game-header h1 {
+    font-size: 1.25rem;
+  }
+
+  .game-description {
+    font-size: 0.8rem;
+    margin: 0.25rem 0;
+  }
+
+  .info-button {
+    width: 28px;
+    height: 28px;
+    font-size: 0.9rem;
+  }
+} 

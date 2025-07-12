@@ -1,0 +1,32 @@
+@media (max-width: 768px) {
+  .clickable-definition {
+    line-height: 1.6;
+    font-size: 1rem;
+  }
+
+  .definition-word.clickable {
+    padding: 1px 3px;
+    border-radius: 3px;
+  }
+
+  .definition-word.clickable:hover {
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .clickable-definition {
+    line-height: 1.5;
+    font-size: 0.95rem;
+  }
+
+  .definition-word.clickable {
+    padding: 1px 2px;
+    border-radius: 2px;
+  }
+
+  .definition-empty {
+    font-size: 0.9rem;
+    margin: 0.75rem 0;
+  }
+} 

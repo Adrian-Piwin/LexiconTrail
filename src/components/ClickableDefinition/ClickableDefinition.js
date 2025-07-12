@@ -1,5 +1,5 @@
 import React from 'react';
-import { parseDefinition } from '../utils/definitionParser';
+import { parseDefinition } from '../../utils/definitionParser';
 import './ClickableDefinition.css';
 
 /**

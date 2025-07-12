@@ -1,0 +1,49 @@
+@import '../../styles/colors.css';
+@import './StartTarget-mobile.css';
+
+.start-target-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+  border: none;
+}
+
+.start-word,
+.target-word {
+  text-align: center;
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  min-width: 200px;
+  background: var(--blue-secondary);
+  border: 1px solid var(--blue-secondary);
+}
+
+.start-word h3,
+.target-word h3 {
+  font-size: 1.8rem;
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: var(--blue-primary);
+}
+
+.start-word p,
+.target-word p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--blue-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.arrow {
+  font-size: 2rem;
+  color: var(--text-subtle);
+  font-weight: 300;
+} 

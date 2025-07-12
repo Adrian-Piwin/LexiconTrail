@@ -1,0 +1,39 @@
+:root {
+  /* Background Colors */
+  --bg-primary: #0f1419;
+  --bg-secondary: #1a1f2e;
+  --bg-tertiary: #2d3748;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-muted: #9ca3af;
+  --text-subtle: #6b7280;
+  
+  /* Blue Theme Colors */
+  --blue-primary: #112A46;
+  --blue-secondary: #ACC8E5;
+  --blue-accent: #60a5fa;
+  --blue-hover: #93c5fd;
+  
+  /* Interactive Colors */
+  --interactive-primary: rgba(59, 130, 246, 0.1);
+  --interactive-primary-hover: rgba(59, 130, 246, 0.2);
+  --interactive-secondary: rgba(255, 255, 255, 0.05);
+  --interactive-secondary-hover: rgba(255, 255, 255, 0.1);
+  
+  /* Border Colors */
+  --border-primary: rgba(255, 255, 255, 0.1);
+  --border-secondary: rgba(255, 255, 255, 0.05);
+  --border-blue: rgba(59, 130, 246, 0.3);
+  
+  /* Success Colors */
+  --success: #4ade80;
+  
+  /* Overlay Colors */
+  --overlay: rgba(0, 0, 0, 0.8);
+  
+  /* Glass Effect */
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+} 
