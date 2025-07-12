@@ -27,16 +27,16 @@ export const fetchDefinition = async (word) => {
       throw new Error('No definition data received');
     }
     
-    // Parse the API response to extract the definition text
-    const definition = parseApiResponse(data);
+    // Parse the API response to extract all definition texts
+    const definitions = parseApiResponse(data);
     
-    if (!definition) {
-      throw new Error('No usable definition found');
+    if (definitions.length === 0) {
+      throw new Error('No usable definitions found');
     }
     
     return {
       word: word.toLowerCase(),
-      definition: definition,
+      definitions: definitions,
       success: true
     };
     
@@ -52,30 +52,35 @@ export const fetchDefinition = async (word) => {
 };
 
 /**
- * Parses the API response to extract the definition text
+ * Parses the API response to extract all definition texts
  * @param {Array} apiData - The raw API response data
- * @returns {string|null} The extracted definition text or null if not found
+ * @returns {Array<string>} Array of definition texts or empty array if not found
  */
 const parseApiResponse = (apiData) => {
   try {
     const entry = apiData[0]; // Usually just one entry
     
     if (!entry || !entry.meanings || !Array.isArray(entry.meanings)) {
-      return null;
+      return [];
     }
     
-    // Find the first meaning with a definition
+    const definitions = [];
+    
+    // Extract all definitions from all meanings
     for (const meaning of entry.meanings) {
-      if (meaning.definitions && Array.isArray(meaning.definitions) && meaning.definitions.length > 0) {
-        // Return the first definition
-        return meaning.definitions[0].definition;
+      if (meaning.definitions && Array.isArray(meaning.definitions)) {
+        for (const def of meaning.definitions) {
+          if (def.definition) {
+            definitions.push(def.definition);
+          }
+        }
       }
     }
     
-    return null;
+    return definitions;
   } catch (error) {
     console.error('Error parsing API response:', error);
-    return null;
+    return [];
   }
 };
 

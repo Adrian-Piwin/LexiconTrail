@@ -17,17 +17,17 @@ export const useApiGameState = () => {
   // API state
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [currentDefinition, setCurrentDefinition] = useState('');
-  const [targetDefinition, setTargetDefinition] = useState('');
+  const [currentDefinitions, setCurrentDefinitions] = useState([]);
+  const [targetDefinitions, setTargetDefinitions] = useState([]);
   
   // Cache for definitions to avoid repeated API calls
   const [definitionCache, setDefinitionCache] = useState(new Map());
   const [availableWords, setAvailableWords] = useState(new Set());
 
   /**
-   * Fetches a definition and caches it
-   * @param {string} word - The word to fetch definition for
-   * @returns {Promise<string|null>} The definition text or null if failed
+   * Fetches definitions and caches them
+   * @param {string} word - The word to fetch definitions for
+   * @returns {Promise<Array<string>|null>} Array of definition texts or null if failed
    */
   const fetchAndCacheDefinition = useCallback(async (word) => {
     if (!word) return null;
@@ -45,20 +45,20 @@ export const useApiGameState = () => {
     try {
       const result = await fetchDefinition(cleanWord);
       
-      if (result.success && result.definition) {
-        // Cache the definition
-        setDefinitionCache(prev => new Map(prev).set(cleanWord, result.definition));
+      if (result.success && result.definitions && result.definitions.length > 0) {
+        // Cache the definitions
+        setDefinitionCache(prev => new Map(prev).set(cleanWord, result.definitions));
         
         // Add word to available words set
         setAvailableWords(prev => new Set(prev).add(cleanWord));
         
-        return result.definition;
+        return result.definitions;
       } else {
-        throw new Error(result.error || 'Failed to fetch definition');
+        throw new Error(result.error || 'Failed to fetch definitions');
       }
     } catch (error) {
-      console.error(`Error fetching definition for "${cleanWord}":`, error);
-      setErrorMessage(`No definition found for "${cleanWord}". Please choose another word.`);
+      console.error(`Error fetching definitions for "${cleanWord}":`, error);
+      setErrorMessage(`No definitions found for "${cleanWord}". Please choose another word.`);
       return null;
     } finally {
       setIsLoading(false);
@@ -66,70 +66,78 @@ export const useApiGameState = () => {
   }, [definitionCache]);
 
   /**
-   * Checks which words in a definition exist in the API and updates available words
-   * @param {string} definition - The definition text to analyze
+   * Checks which words in definitions exist in the API and updates available words
+   * @param {Array<string>} definitions - Array of definition texts to analyze
    * @returns {Promise<Set>} Set of words that exist in the API
    */
-  const checkWordsInDefinition = useCallback(async (definition) => {
-    if (!definition) return new Set();
+  const checkWordsInDefinitions = useCallback(async (definitions) => {
+    if (!definitions || definitions.length === 0) return new Set();
     
-    // Extract all words from the definition
-    const words = definition.toLowerCase().match(/\b[a-z]+\b/g) || [];
-    const uniqueWords = [...new Set(words)];
+    const allExistingWords = new Set();
     
-    // Filter out stop words
-    const { stopWords } = await import('../data/stopWords');
-    const filteredWords = uniqueWords.filter(word => !stopWords.has(word));
-    
-    // Check each word against the API (limit to first 10 words to avoid too many requests)
-    const wordsToCheck = filteredWords.slice(0, 10);
-    const existingWords = new Set();
-    
-    // Check words that are already cached
-    for (const word of wordsToCheck) {
-      if (definitionCache.has(word)) {
-        existingWords.add(word);
+    // Process each definition
+    for (const definition of definitions) {
+      // Extract all words from the definition
+      const words = definition.toLowerCase().match(/\b[a-z]+\b/g) || [];
+      const uniqueWords = [...new Set(words)];
+      
+      // Filter out stop words
+      const { stopWords } = await import('../data/stopWords');
+      const filteredWords = uniqueWords.filter(word => !stopWords.has(word));
+      
+      // Check each word against the API (limit to first 10 words to avoid too many requests)
+      const wordsToCheck = filteredWords.slice(0, 10);
+      const existingWords = new Set();
+      
+      // Check words that are already cached
+      for (const word of wordsToCheck) {
+        if (definitionCache.has(word)) {
+          existingWords.add(word);
+        }
       }
-    }
-    
-    // Check remaining words against the API
-    const uncachedWords = wordsToCheck.filter(word => !definitionCache.has(word));
-    
-    if (uncachedWords.length > 0) {
-      // Make API calls in parallel (but limit to 5 at a time to be respectful)
-      const batchSize = 5;
-      for (let i = 0; i < uncachedWords.length; i += batchSize) {
-        const batch = uncachedWords.slice(i, i + batchSize);
-        const promises = batch.map(async (word) => {
-          try {
-            const result = await fetchDefinition(word);
-            if (result.success) {
-              // Cache the definition for future use
-              setDefinitionCache(prev => new Map(prev).set(word, result.definition));
-              return word;
+      
+      // Check remaining words against the API
+      const uncachedWords = wordsToCheck.filter(word => !definitionCache.has(word));
+      
+      if (uncachedWords.length > 0) {
+        // Make API calls in parallel (but limit to 5 at a time to be respectful)
+        const batchSize = 5;
+        for (let i = 0; i < uncachedWords.length; i += batchSize) {
+          const batch = uncachedWords.slice(i, i + batchSize);
+          const promises = batch.map(async (word) => {
+            try {
+              const result = await fetchDefinition(word);
+              if (result.success) {
+                // Cache the definitions for future use
+                setDefinitionCache(prev => new Map(prev).set(word, result.definitions));
+                return word;
+              }
+            } catch (error) {
+              // Word doesn't exist in API, skip it
+              console.log(`Word "${word}" not found in API`);
             }
-          } catch (error) {
-            // Word doesn't exist in API, skip it
-            console.log(`Word "${word}" not found in API`);
-          }
-          return null;
-        });
-        
-        const results = await Promise.all(promises);
-        results.forEach(word => {
-          if (word) {
-            existingWords.add(word);
-          }
-        });
+            return null;
+          });
+          
+          const results = await Promise.all(promises);
+          results.forEach(word => {
+            if (word) {
+              existingWords.add(word);
+            }
+          });
+        }
       }
+      
+      // Add words from this definition to the overall set
+      existingWords.forEach(word => allExistingWords.add(word));
     }
     
     // Update available words set
-    setAvailableWords(prev => new Set([...prev, ...existingWords]));
+    setAvailableWords(prev => new Set([...prev, ...allExistingWords]));
     
-    console.log(`Found ${existingWords.size} clickable words in definition:`, Array.from(existingWords));
+    console.log(`Found ${allExistingWords.size} clickable words in definitions:`, Array.from(allExistingWords));
     
-    return existingWords;
+    return allExistingWords;
   }, [definitionCache]);
 
   /**
@@ -143,22 +151,22 @@ export const useApiGameState = () => {
       const { start, target } = getRandomStartAndTarget();
       
       // Fetch definitions for both start and target words
-      const [startDefinition, targetDefinition] = await Promise.all([
+      const [startDefinitions, targetDefinitions] = await Promise.all([
         fetchAndCacheDefinition(start),
         fetchAndCacheDefinition(target)
       ]);
       
-      if (!startDefinition || !targetDefinition) {
+      if (!startDefinitions || !targetDefinitions) {
         throw new Error('Failed to fetch definitions for start or target word');
       }
       
-      // Check which words in the start definition exist in the API
-      await checkWordsInDefinition(startDefinition);
+      // Check which words in the start definitions exist in the API
+      await checkWordsInDefinitions(startDefinitions);
       
       setCurrentWord(start);
       setTargetWord(target);
-      setCurrentDefinition(startDefinition);
-      setTargetDefinition(targetDefinition);
+      setCurrentDefinitions(startDefinitions);
+      setTargetDefinitions(targetDefinitions);
       setMoveCount(0);
       setGameStatus('playing');
       setGameHistory([start]);
@@ -169,7 +177,7 @@ export const useApiGameState = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [fetchAndCacheDefinition, checkWordsInDefinition]);
+  }, [fetchAndCacheDefinition, checkWordsInDefinitions]);
 
   /**
    * Handles clicking on a word in the definition
@@ -182,14 +190,14 @@ export const useApiGameState = () => {
     
     // Check if we already have this word cached
     if (definitionCache.has(cleanWord)) {
-      const definition = definitionCache.get(cleanWord);
+      const definitions = definitionCache.get(cleanWord);
       
-      // Check which words in the definition exist in the API
-      await checkWordsInDefinition(definition);
+      // Check which words in the definitions exist in the API
+      await checkWordsInDefinitions(definitions);
       
       // Update game state immediately
       setCurrentWord(cleanWord);
-      setCurrentDefinition(definition);
+      setCurrentDefinitions(definitions);
       setMoveCount(prev => prev + 1);
       setGameHistory(prev => [...prev, cleanWord]);
       
@@ -200,20 +208,20 @@ export const useApiGameState = () => {
       return;
     }
     
-    // Fetch the definition
+    // Fetch the definitions
     setIsLoading(true);
     setErrorMessage('');
     
     try {
-      const definition = await fetchAndCacheDefinition(cleanWord);
+      const definitions = await fetchAndCacheDefinition(cleanWord);
       
-      if (definition) {
-        // Check which words in the definition exist in the API
-        await checkWordsInDefinition(definition);
+      if (definitions) {
+        // Check which words in the definitions exist in the API
+        await checkWordsInDefinitions(definitions);
         
         // Update game state
         setCurrentWord(cleanWord);
-        setCurrentDefinition(definition);
+        setCurrentDefinitions(definitions);
         setMoveCount(prev => prev + 1);
         setGameHistory(prev => [...prev, cleanWord]);
         
@@ -224,27 +232,27 @@ export const useApiGameState = () => {
       }
     } catch (error) {
       console.error(`Error handling word click for "${cleanWord}":`, error);
-      setErrorMessage(`Failed to fetch definition for "${cleanWord}". Please try another word.`);
+      setErrorMessage(`Failed to fetch definitions for "${cleanWord}". Please try another word.`);
     } finally {
       setIsLoading(false);
     }
-  }, [gameStatus, isLoading, targetWord, definitionCache, fetchAndCacheDefinition, checkWordsInDefinition]);
+  }, [gameStatus, isLoading, targetWord, definitionCache, fetchAndCacheDefinition, checkWordsInDefinitions]);
 
   /**
-   * Gets the current word's definition
-   * @returns {string} The definition of the current word
+   * Gets the current word's definitions
+   * @returns {Array<string>} The definitions of the current word
    */
-  const getCurrentDefinition = useCallback(() => {
-    return currentDefinition;
-  }, [currentDefinition]);
+  const getCurrentDefinitions = useCallback(() => {
+    return currentDefinitions;
+  }, [currentDefinitions]);
 
   /**
-   * Gets the target word's definition
-   * @returns {string} The definition of the target word
+   * Gets the target word's definitions
+   * @returns {Array<string>} The definitions of the target word
    */
-  const getTargetDefinition = useCallback(() => {
-    return targetDefinition;
-  }, [targetDefinition]);
+  const getTargetDefinitions = useCallback(() => {
+    return targetDefinitions;
+  }, [targetDefinitions]);
 
   /**
    * Checks if the game is won
@@ -260,8 +268,8 @@ export const useApiGameState = () => {
   const resetGame = useCallback(() => {
     setCurrentWord('');
     setTargetWord('');
-    setCurrentDefinition('');
-    setTargetDefinition('');
+    setCurrentDefinitions([]);
+    setTargetDefinitions([]);
     setMoveCount(0);
     setGameStatus('idle');
     setGameHistory([]);
@@ -286,8 +294,8 @@ export const useApiGameState = () => {
     gameHistory,
     isLoading,
     errorMessage,
-    currentDefinition,
-    targetDefinition,
+    currentDefinitions,
+    targetDefinitions,
     availableWords,
     
     // Actions
@@ -297,8 +305,8 @@ export const useApiGameState = () => {
     clearCache,
     
     // Computed values
-    getCurrentDefinition,
-    getTargetDefinition,
+    getCurrentDefinitions,
+    getTargetDefinitions,
     isGameWon
   };
 }; 

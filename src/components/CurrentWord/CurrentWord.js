@@ -1,17 +1,16 @@
 import React from 'react';
-import ClickableDefinition from '../ClickableDefinition/ClickableDefinition';
+import MultipleDefinitions from '../MultipleDefinitions/MultipleDefinitions';
 import './CurrentWord.css';
 
-const CurrentWord = ({ currentWord, definition, onWordClick, availableWords }) => {
+const CurrentWord = ({ currentWord, definitions, onWordClick, availableWords }) => {
   return (
     <div className="current-word-section">
       <h2>Current Word</h2>
       <div className="current-word-card">
         <h3>{currentWord}</h3>
-        <ClickableDefinition 
-          definition={definition}
+        <MultipleDefinitions 
+          definitions={definitions}
           onWordClick={onWordClick}
-          isClickable={true}
           availableWords={availableWords}
           currentWord={currentWord}
         />

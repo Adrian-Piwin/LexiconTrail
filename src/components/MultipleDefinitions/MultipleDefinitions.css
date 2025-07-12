@@ -1,0 +1,48 @@
+@import '../../styles/colors.css';
+
+.multiple-definitions {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.definition-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  padding: 1.5rem;
+  backdrop-filter: blur(20px);
+  transition: all 0.2s ease;
+}
+
+.definition-card:hover {
+  border-color: var(--border-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.definition-empty {
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding: 2rem;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .multiple-definitions {
+    gap: 1rem;
+  }
+  
+  .definition-card {
+    padding: 1rem;
+  }
+  
+  .definition-number {
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+  }
+} 

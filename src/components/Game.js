@@ -26,12 +26,12 @@ const Game = () => {
     startNewGame,
     handleWordClick,
     resetGame,
-    getCurrentDefinition,
-    getTargetDefinition,
+    getCurrentDefinitions,
+    getTargetDefinitions,
     isGameWon
   } = useApiGameState();
 
-  const currentDefinition = getCurrentDefinition();
+  const currentDefinitions = getCurrentDefinitions();
 
   // Render idle state (no game started)
   if (gameStatus === 'idle') {
@@ -123,7 +123,7 @@ const Game = () => {
 
         <CurrentWord 
           currentWord={currentWord}
-          definition={currentDefinition}
+          definitions={currentDefinitions}
           onWordClick={handleWordClick}
           availableWords={availableWords}
         />
