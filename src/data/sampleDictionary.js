@@ -84,15 +84,8 @@ export const sampleDictionary = {
   }
 };
 
-// Stop words that should not be clickable
-export const stopWords = new Set([
-  "a", "an", "and", "are", "as", "at", "be", "by", "for", "from", "has", "he", 
-  "in", "is", "it", "its", "of", "on", "that", "the", "to", "was", "will", 
-  "with", "or", "but", "not", "this", "they", "have", "had", "what", "when", 
-  "where", "who", "which", "why", "how", "all", "any", "both", "each", "few", 
-  "more", "most", "other", "some", "such", "no", "nor", "only", "own", "same", 
-  "so", "than", "too", "very", "can", "may", "must", "shall", "should", "would"
-]);
+// Import stop words from dedicated file
+export { stopWords } from './stopWords';
 
 // Utility function to get all available words
 export const getAvailableWords = () => Object.keys(sampleDictionary);

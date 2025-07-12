@@ -78,7 +78,7 @@ export const useApiGameState = () => {
     const uniqueWords = [...new Set(words)];
     
     // Filter out stop words
-    const { stopWords } = await import('../data/sampleDictionary');
+    const { stopWords } = await import('../data/stopWords');
     const filteredWords = uniqueWords.filter(word => !stopWords.has(word));
     
     // Check each word against the API (limit to first 10 words to avoid too many requests)

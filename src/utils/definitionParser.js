@@ -1,4 +1,4 @@
-import { stopWords } from '../data/sampleDictionary';
+import { stopWords } from '../data/stopWords';
 
 console.log('Stop words loaded:', Array.from(stopWords));
 
