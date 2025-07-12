@@ -11,7 +11,7 @@ const Trail = ({ gameHistory, moveCount }) => {
       <div className="info-card">
         <div className="trail-header">
           <h3>Your Trail</h3>
-          <span className="stat">Moves: {moveCount}</span>
+          <span className="stat">{moveCount}</span>
         </div>
         <div className="path-display">
           {gameHistory.map((word, index) => (
