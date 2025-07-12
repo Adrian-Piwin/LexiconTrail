@@ -1,5 +1,7 @@
 import { stopWords } from '../data/sampleDictionary';
 
+console.log('Stop words loaded:', Array.from(stopWords));
+
 /**
  * Parses a definition and identifies which words should be clickable
  * @param {string} definition - The definition text to parse
@@ -11,12 +13,18 @@ export const parseDefinition = (definition, availableWords = new Set()) => {
   const words = definition.split(/\b/);
   const result = [];
   
+  console.log('Parsing definition:', definition);
+  console.log('Available words:', Array.from(availableWords));
+  
   words.forEach((word, index) => {
     const cleanWord = word.toLowerCase().replace(/[^\w]/g, '');
     
     // Check if this is a word (not punctuation or whitespace)
     if (cleanWord.length > 0) {
       const isClickable = availableWords.has(cleanWord) && !stopWords.has(cleanWord);
+      if (isClickable) {
+        console.log(`Making "${cleanWord}" clickable`);
+      }
       result.push({
         word: word,
         cleanWord: cleanWord,
