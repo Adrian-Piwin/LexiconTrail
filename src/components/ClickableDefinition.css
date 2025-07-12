@@ -1,12 +1,11 @@
 .clickable-definition {
-  line-height: 1.6;
+  line-height: 1.7;
   font-size: 1.1rem;
-  color: #333;
+  color: #d1d5db;
   text-align: left;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  border: 1px solid #e9ecef;
+  padding: 0;
+  background: none;
+  border: none;
 }
 
 .definition-word {
@@ -22,31 +21,34 @@
 }
 
 .definition-word.clickable {
-  color: #007bff;
-  text-decoration: underline;
+  color: #60a5fa;
+  text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 3px;
-  padding: 1px 2px;
+  border-radius: 4px;
+  padding: 2px 4px;
+  background: rgba(96, 165, 250, 0.1);
+  border: 1px solid transparent;
 }
 
 .definition-word.clickable:hover {
-  color: #0056b3;
-  background-color: #e3f2fd;
-  text-decoration: none;
+  color: #93c5fd;
+  background: rgba(96, 165, 250, 0.2);
+  border-color: rgba(96, 165, 250, 0.3);
+  transform: translateY(-1px);
 }
 
 .definition-word.clickable:active {
-  transform: translateY(1px);
+  transform: translateY(0);
 }
 
 .definition-word.clickable:focus {
-  outline: 2px solid #007bff;
+  outline: 2px solid rgba(96, 165, 250, 0.5);
   outline-offset: 2px;
 }
 
 .definition-empty {
-  color: #6c757d;
+  color: #6b7280;
   font-style: italic;
   text-align: center;
   margin: 1rem 0;
