@@ -1,5 +1,6 @@
 import React from 'react';
 import './Header.css';
+import './Header-mobile.css';
 
 const Header = ({ title, description, showInfoButton, onInfoClick, showStats, moveCount }) => {
   return (

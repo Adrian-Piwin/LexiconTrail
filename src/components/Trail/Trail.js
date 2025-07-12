@@ -1,5 +1,6 @@
 import React from 'react';
 import './Trail.css';
+import './Trail-mobile.css';
 
 const Trail = ({ gameHistory, moveCount }) => {
   if (gameHistory.length <= 1) {

@@ -1,5 +1,5 @@
 @import '../../styles/colors.css';
-@import './StartTarget-mobile.css';
+
 
 .start-target-display {
   display: flex;
@@ -18,7 +18,8 @@
   text-align: center;
   padding: 1.5rem 2rem;
   border-radius: 15px;
-  min-width: 200px;
+  max-width: 250px;
+  flex: 1;
   background: var(--blue-secondary);
   border: 1px solid var(--blue-secondary);
 }
@@ -30,6 +31,8 @@
   font-weight: 600;
   text-transform: capitalize;
   color: var(--blue-primary);
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .start-word p,
@@ -46,6 +49,7 @@
   font-size: 2rem;
   color: var(--text-subtle);
   font-weight: 300;
+  flex-shrink: 0;
 }
 
  

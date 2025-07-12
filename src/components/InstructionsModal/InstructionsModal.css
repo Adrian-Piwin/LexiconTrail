@@ -1,5 +1,4 @@
 @import '../../styles/colors.css';
-@import './InstructionsModal-mobile.css';
 
 .modal-overlay {
   position: fixed;

@@ -1,5 +1,6 @@
 import React from 'react';
 import './StartTarget.css';
+import './StartTarget-mobile.css';
 
 const StartTarget = ({ startWord, targetWord }) => {
   return (

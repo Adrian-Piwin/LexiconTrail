@@ -7,6 +7,7 @@ import InstructionsModal from './InstructionsModal/InstructionsModal';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
 import { useApiGameState } from '../hooks/useApiGameState';
 import './Game.css';
+import './Game-mobile.css';
 
 /**
  * Main game component that handles the core gameplay

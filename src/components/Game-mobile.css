@@ -1,86 +1,23 @@
 @media (max-width: 768px) {
-  .game-container {
-    padding: 1rem;
-    gap: 2rem;
-    min-height: 100vh;
-  }
-
   .game-content {
-    gap: 1.5rem;
+    gap: 3rem;
   }
 
-  .win-message {
-    padding: 2rem 1.5rem;
-    margin: 1.5rem 0;
-    border-radius: 15px;
-  }
-
-  .win-message h2 {
-    font-size: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .win-message p {
-    font-size: 1rem;
+  .game-container {
+    gap: 0;
   }
 
   .game-actions {
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-    padding-bottom: 1rem;
-  }
-
-  .game-start {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
     margin-top: 2rem;
-    padding-bottom: 1rem;
+    flex-wrap: wrap;
+
   }
 
-  .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
-    min-width: 120px;
+  .game-actions .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
   }
 }
-
-@media (max-width: 480px) {
-  .game-container {
-    padding: 0.5rem;
-    gap: 1rem;
-  }
-
-  .game-content {
-    gap: 1rem;
-  }
-
-  .win-message {
-    padding: 1.5rem 1rem;
-    margin: 1rem 0;
-    border-radius: 12px;
-  }
-
-  .win-message h2 {
-    font-size: 1.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .win-message p {
-    font-size: 0.9rem;
-  }
-
-  .game-actions {
-    gap: 0.5rem;
-    margin-top: 1rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .game-start {
-    margin-top: 1.5rem;
-    padding-bottom: 0.75rem;
-  }
-
-  .btn {
-    padding: 0.7rem 1.25rem;
-    font-size: 0.9rem;
-    min-width: 100px;
-  }
-} 

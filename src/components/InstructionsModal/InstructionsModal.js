@@ -17,7 +17,6 @@ const InstructionsModal = ({ isOpen, onClose }) => {
             <li>Continue clicking words until you reach the target word</li>
             <li>Try to reach the target in as few moves as possible!</li>
           </ol>
-          <p><strong>Tip:</strong> Only words that exist in our dictionary are clickable. Common words like "the", "and", "is" are not clickable.</p>
         </div>
         <button className="btn btn-primary" onClick={onClose}>
           Got it!
