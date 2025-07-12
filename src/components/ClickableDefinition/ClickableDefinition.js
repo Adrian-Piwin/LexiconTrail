@@ -8,13 +8,14 @@ import './ClickableDefinition.css';
  * @param {string} props.definition - The definition text to render
  * @param {Function} props.onWordClick - Callback when a word is clicked
  * @param {boolean} props.isClickable - Whether words should be clickable (default: true)
+ * @param {Set} props.availableWords - Set of words that are available for clicking
  */
-const ClickableDefinition = ({ definition, onWordClick, isClickable = true }) => {
+const ClickableDefinition = ({ definition, onWordClick, isClickable = true, availableWords = new Set() }) => {
   if (!definition) {
     return <p className="definition-empty">No definition available.</p>;
   }
 
-  const parsedWords = parseDefinition(definition);
+  const parsedWords = parseDefinition(definition, availableWords);
 
   const handleWordClick = (word, cleanWord) => {
     if (isClickable && onWordClick) {

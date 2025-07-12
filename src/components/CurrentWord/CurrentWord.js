@@ -2,7 +2,7 @@ import React from 'react';
 import ClickableDefinition from '../ClickableDefinition/ClickableDefinition';
 import './CurrentWord.css';
 
-const CurrentWord = ({ currentWord, definition, onWordClick }) => {
+const CurrentWord = ({ currentWord, definition, onWordClick, availableWords }) => {
   return (
     <div className="current-word-section">
       <h2>Current Word</h2>
@@ -12,6 +12,7 @@ const CurrentWord = ({ currentWord, definition, onWordClick }) => {
           definition={definition}
           onWordClick={onWordClick}
           isClickable={true}
+          availableWords={availableWords}
         />
       </div>
     </div>

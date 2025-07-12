@@ -1,11 +1,12 @@
-import { isWordInDictionary, stopWords } from '../data/sampleDictionary';
+import { stopWords } from '../data/sampleDictionary';
 
 /**
  * Parses a definition and identifies which words should be clickable
  * @param {string} definition - The definition text to parse
+ * @param {Set} availableWords - Set of words that are available for clicking
  * @returns {Array} Array of objects with word, isClickable, and originalIndex properties
  */
-export const parseDefinition = (definition) => {
+export const parseDefinition = (definition, availableWords = new Set()) => {
   // Split the definition into words while preserving punctuation
   const words = definition.split(/\b/);
   const result = [];
@@ -15,7 +16,7 @@ export const parseDefinition = (definition) => {
     
     // Check if this is a word (not punctuation or whitespace)
     if (cleanWord.length > 0) {
-      const isClickable = isWordInDictionary(cleanWord) && !stopWords.has(cleanWord);
+      const isClickable = availableWords.has(cleanWord) && !stopWords.has(cleanWord);
       result.push({
         word: word,
         cleanWord: cleanWord,
@@ -39,10 +40,11 @@ export const parseDefinition = (definition) => {
 /**
  * Extracts all clickable words from a definition
  * @param {string} definition - The definition text
+ * @param {Set} availableWords - Set of words that are available for clicking
  * @returns {Array} Array of clickable word strings
  */
-export const getClickableWords = (definition) => {
-  const parsed = parseDefinition(definition);
+export const getClickableWords = (definition, availableWords = new Set()) => {
+  const parsed = parseDefinition(definition, availableWords);
   return parsed
     .filter(item => item.isClickable)
     .map(item => item.cleanWord);
@@ -51,8 +53,9 @@ export const getClickableWords = (definition) => {
 /**
  * Checks if a definition contains any clickable words
  * @param {string} definition - The definition text
+ * @param {Set} availableWords - Set of words that are available for clicking
  * @returns {boolean} True if the definition has clickable words
  */
-export const hasClickableWords = (definition) => {
-  return getClickableWords(definition).length > 0;
+export const hasClickableWords = (definition, availableWords = new Set()) => {
+  return getClickableWords(definition, availableWords).length > 0;
 }; 

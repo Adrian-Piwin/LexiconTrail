@@ -4,7 +4,8 @@ import StartTarget from './StartTarget/StartTarget';
 import CurrentWord from './CurrentWord/CurrentWord';
 import Trail from './Trail/Trail';
 import InstructionsModal from './InstructionsModal/InstructionsModal';
-import { useGameState } from '../hooks/useGameState';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner';
+import { useApiGameState } from '../hooks/useApiGameState';
 import './Game.css';
 
 /**
@@ -19,13 +20,16 @@ const Game = () => {
     moveCount,
     gameStatus,
     gameHistory,
+    isLoading,
+    errorMessage,
+    availableWords,
     startNewGame,
     handleWordClick,
     resetGame,
     getCurrentDefinition,
     getTargetDefinition,
     isGameWon
-  } = useGameState();
+  } = useApiGameState();
 
   const currentDefinition = getCurrentDefinition();
 
@@ -40,8 +44,12 @@ const Game = () => {
           onInfoClick={() => setShowInstructions(true)}
         />
         <div className="game-start">
-          <button className="btn btn-primary" onClick={startNewGame}>
-            Start New Game
+          <button 
+            className="btn btn-primary" 
+            onClick={startNewGame}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Loading...' : 'Start New Game'}
           </button>
         </div>
         
@@ -87,6 +95,27 @@ const Game = () => {
       />
 
       <div className="game-content">
+        {/* Error message display */}
+        {errorMessage && (
+          <div className="error-message">
+            <p>{errorMessage}</p>
+            <button 
+              className="btn btn-secondary" 
+              onClick={() => window.location.reload()}
+              style={{ marginTop: '0.5rem', fontSize: '0.8rem', padding: '0.5rem 1rem' }}
+            >
+              Retry
+            </button>
+          </div>
+        )}
+
+        {/* Loading indicator */}
+        {isLoading && (
+          <div className="loading-indicator">
+            <LoadingSpinner message="Loading definition..." size="medium" />
+          </div>
+        )}
+
         <StartTarget 
           startWord={gameHistory[0]}
           targetWord={targetWord}
@@ -96,14 +125,19 @@ const Game = () => {
           currentWord={currentWord}
           definition={currentDefinition}
           onWordClick={handleWordClick}
+          availableWords={availableWords}
         />
 
         <Trail gameHistory={gameHistory} moveCount={moveCount} />
       </div>
 
       <div className="game-actions">
-        <button className="btn btn-primary" onClick={startNewGame}>
-          New Game
+        <button 
+          className="btn btn-primary" 
+          onClick={startNewGame}
+          disabled={isLoading}
+        >
+          {isLoading ? 'Loading...' : 'New Game'}
         </button>
         <button className="btn btn-secondary" onClick={resetGame}>
           Back to Menu
