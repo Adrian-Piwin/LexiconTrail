@@ -13,6 +13,7 @@ const CurrentWord = ({ currentWord, definition, onWordClick, availableWords }) =
           onWordClick={onWordClick}
           isClickable={true}
           availableWords={availableWords}
+          currentWord={currentWord}
         />
       </div>
     </div>
